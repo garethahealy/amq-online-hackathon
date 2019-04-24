@@ -11,5 +11,4 @@ objects:
   spec:
     address: alerts
     type: topic
-    plan: alerts
-
+    plan: topic

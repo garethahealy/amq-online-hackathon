@@ -11,8 +11,7 @@ objects:
   spec:
     address: results${CUSTOMER_ID}
     type: queue
-    plan: results
+    plan: queuepartitionsday
 parameters:
 - name: CUSTOMER_ID
   required: true
-

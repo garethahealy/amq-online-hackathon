@@ -20,7 +20,8 @@ objects:
       broker: 10.0
       aggregate: 30.0
     addressPlans:
-    - batch
-    - online
-    - results
-    - alerts
+    - anycastrouterday
+    - anycastrouternight
+    - queuepartitionsday
+    - queuepartitionsnight
+    - topic

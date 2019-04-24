@@ -7,17 +7,19 @@ objects:
 - apiVersion: admin.enmasse.io/v1beta2
   kind: AddressPlan
   metadata:
-    name: results
+    name: ${PLAN_NAME}
     labels:
       app: enmasse
   spec:
-    displayName: results
+    displayName: ${PLAN_NAME}
     addressType: queue
     partitions: 2
     resources:
       router: ${{ROUTER_SLICE}}
       broker: ${{BROKER_SLICE}}
 parameters:
+- name: PLAN_NAME
+  required: true
 - name: ROUTER_SLICE
   required: true
 - name: BROKER_SLICE

@@ -11,5 +11,4 @@ objects:
   spec:
     address: inputonline
     type: queue
-    plan: online
-
+    plan: queuepartitionsday

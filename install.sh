@@ -24,10 +24,13 @@ oc apply -n enmasse-infra -f install/components/scenario1/AuthenticationService-
 
 oc process -f install/components/scenario1/StandardInfraConfig-template.yaml | oc apply -n enmasse-infra  -f -
 
-oc process -f install/components/scenario1/AddressPlan-batch-template.yaml -p ROUTER_SLICE=0.001 | oc apply -n enmasse-infra  -f -
-oc process -f install/components/scenario1/AddressPlan-online-template.yaml -p ROUTER_SLICE=0.001 -p BROKER_SLICE=0.001 | oc apply -n enmasse-infra  -f -
-oc process -f install/components/scenario1/AddressPlan-results-template.yaml -p ROUTER_SLICE=0.001 -p BROKER_SLICE=0.001 | oc apply -n enmasse-infra  -f -
-oc process -f install/components/scenario1/AddressPlan-alerts-template.yaml -p ROUTER_SLICE=0.001 -p BROKER_SLICE=0.001 | oc apply -n enmasse-infra  -f -
+oc process -f install/components/scenario1/AddressPlan-anycastrouter-template.yaml -p PLAN_NAME=anycastrouterday -p ROUTER_SLICE=0.0000001 | oc apply -n enmasse-infra  -f -
+oc process -f install/components/scenario1/AddressPlan-anycastrouter-template.yaml -p PLAN_NAME=anycastrouternight -p ROUTER_SLICE=0.1 | oc apply -n enmasse-infra  -f -
+
+oc process -f install/components/scenario1/AddressPlan-queue-partitions-template.yaml -p PLAN_NAME=queuepartitionsday -p ROUTER_SLICE=0.1 -p BROKER_SLICE=0.1 | oc apply -n enmasse-infra  -f -
+oc process -f install/components/scenario1/AddressPlan-queue-partitions-template.yaml -p PLAN_NAME=queuepartitionsnight -p ROUTER_SLICE=0.0000001 -p BROKER_SLICE=0.0000001 | oc apply -n enmasse-infra  -f -
+
+oc process -f install/components/scenario1/AddressPlan-topic-template.yaml -p ROUTER_SLICE=0.1 -p BROKER_SLICE=0.1 | oc apply -n enmasse-infra  -f -
 
 oc process -f install/components/scenario1/AddressSpacePlan-default-template.yaml | oc apply -n enmasse-infra  -f -
 

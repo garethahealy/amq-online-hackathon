@@ -7,15 +7,17 @@ objects:
 - apiVersion: admin.enmasse.io/v1beta2
   kind: AddressPlan
   metadata:
-    name: batch
+    name: topic
     labels:
       app: enmasse
   spec:
-    displayName: batch
-    addressType: anycast
+    displayName: topic
+    addressType: topic
     resources:
       router: ${{ROUTER_SLICE}}
-      broker: 0
+      broker: ${{BROKER_SLICE}}
 parameters:
 - name: ROUTER_SLICE
+  required: true
+- name: BROKER_SLICE
   required: true

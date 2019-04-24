@@ -11,5 +11,4 @@ objects:
   spec:
     address: inputbatch
     type: anycast
-    plan: batch
-
+    plan: anycastrouterday
