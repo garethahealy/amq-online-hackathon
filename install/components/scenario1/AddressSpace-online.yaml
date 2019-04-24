@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Template
+metadata:
+  name: addressSpace-batch-template
+objects:
+- apiVersion: enmasse.io/v1beta1
+  kind: AddressSpace
+  metadata:
+    name: online
+  spec:
+    type: standard
+    plan: day

@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Template
+metadata:
+  name: users-template
+objects:
+  - apiVersion: user.enmasse.io/v1beta1
+    kind: MessagingUser
+    metadata:
+      name: ${ADDRESS_SPACE}.${USERNAME}
+      labels:
+        app: enmasse
+    spec:
+      username: ${USERNAME}
+      authentication:
+        type: password
+        password: ${PASSWORD}
+      authorization:
+        - addresses: ["inputonline", "inputbatch"]
+          operations: ["send"]
+        - addresses: ["alerts"]
+          operations: ["recv"]
+        - addresses: ["results${CUSTOMER_ID}"]
+          operations: ["recv"]
+parameters:
+  - name: ADDRESS_SPACE
+    required: true
+  - name: USERNAME
+    required: true
+  - name: PASSWORD
+    required: true
+  - name: CUSTOMER_ID
+    required: true

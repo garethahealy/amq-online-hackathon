@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Template
+metadata:
+    name: addressPlan-batch-template
+objects:
+- apiVersion: enmasse.io/v1beta1
+  kind: Address
+  metadata:
+    name: online.inputonline
+  spec:
+    address: inputonline
+    type: queue
+    plan: online
+
