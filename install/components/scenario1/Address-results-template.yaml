@@ -7,7 +7,7 @@ objects:
 - apiVersion: enmasse.io/v1beta1
   kind: Address
   metadata:
-    name: perm.results${CUSTOMER_ID}
+    name: default.results${CUSTOMER_ID}
   spec:
     address: results${CUSTOMER_ID}
     type: queue

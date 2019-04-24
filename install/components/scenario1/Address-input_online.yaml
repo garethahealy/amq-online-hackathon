@@ -7,7 +7,7 @@ objects:
 - apiVersion: enmasse.io/v1beta1
   kind: Address
   metadata:
-    name: online.inputonline
+    name: default.inputonline
   spec:
     address: inputonline
     type: queue

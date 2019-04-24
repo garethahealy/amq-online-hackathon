@@ -7,7 +7,7 @@ objects:
 - apiVersion: enmasse.io/v1beta1
   kind: Address
   metadata:
-    name: perm.alerts
+    name: default.alerts
   spec:
     address: alerts
     type: topic

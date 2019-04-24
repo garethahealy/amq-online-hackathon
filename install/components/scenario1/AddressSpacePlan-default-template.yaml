@@ -2,16 +2,16 @@
 apiVersion: v1
 kind: Template
 metadata:
-  name: addressSpacePlan-batch-template
+  name: addressSpacePlan-default-template
 objects:
 - apiVersion: admin.enmasse.io/v1beta2
   kind: AddressSpacePlan
   metadata:
-    name: perm
+    name: default
     labels:
       app: enmasse
   spec:
-    displayName: Perm
+    displayName: Default
     displayOrder: 0
     infraConfigRef: default
     addressSpaceType: standard
@@ -20,5 +20,7 @@ objects:
       broker: 10.0
       aggregate: 30.0
     addressPlans:
+    - batch
+    - online
     - results
     - alerts

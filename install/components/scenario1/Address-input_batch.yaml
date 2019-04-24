@@ -7,7 +7,7 @@ objects:
 - apiVersion: enmasse.io/v1beta1
   kind: Address
   metadata:
-    name: batch.inputbatch
+    name: default.inputbatch
   spec:
     address: inputbatch
     type: anycast
