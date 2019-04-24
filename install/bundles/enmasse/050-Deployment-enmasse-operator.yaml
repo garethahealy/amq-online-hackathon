@@ -1,0 +1,88 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: enmasse-operator
+  labels:
+    app: enmasse
+    name: enmasse-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: enmasse
+      name: enmasse-operator
+  template:
+    metadata:
+      labels:
+        app: enmasse
+        name: enmasse-operator
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: node-role.enmasse.io/operator-infra
+                    operator: In
+                    values:
+                      - "true"
+      serviceAccountName: enmasse-operator
+      containers:
+      - name: controller
+        image: docker.io/enmasseproject/controller-manager:0.28.0-rc6
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: OPERATOR_NAME
+          value: "enmasse-operator"
+        - name: IMAGE_PULL_POLICY
+          value: "IfNotPresent"
+        - name: CONTROLLER_DISABLE_ALL
+          value: "true"
+        - name: CONTROLLER_ENABLE_IOT_CONFIG
+          value: "true"
+        - name: CONTROLLER_ENABLE_AUTHENTICATION_SERVICE
+          value: "true"
+        - name: IOT_AUTH_SERVICE_IMAGE
+          value: docker.io/enmasseproject/iot-auth-service:0.28.0-rc6
+        - name: IOT_DEVICE_REGISTRY_FILE_IMAGE
+          value: docker.io/enmasseproject/iot-device-registry-file:0.28.0-rc6
+        - name: IOT_GC_IMAGE
+          value: docker.io/enmasseproject/iot-gc:0.28.0-rc6
+        - name: IOT_HTTP_ADAPTER_IMAGE
+          value: docker.io/enmasseproject/iot-http-adapter:0.28.0-rc6
+        - name: IOT_MQTT_ADAPTER_IMAGE
+          value: docker.io/enmasseproject/iot-mqtt-adapter:0.28.0-rc6
+        - name: IOT_TENANT_SERVICE_IMAGE
+          value: docker.io/enmasseproject/iot-tenant-service:0.28.0-rc6
+        - name: IOT_PROXY_CONFIGURATOR_IMAGE
+          value: docker.io/enmasseproject/iot-proxy-configurator:0.28.0-rc6
+        - name: QDROUTERD_BASE_IMAGE
+          value: enmasseproject/qdrouterd-base:1.6.0-rc1
+        - name: NONE_AUTHSERVICE_IMAGE
+          value: docker.io/enmasseproject/none-authservice:0.28.0-rc6
+        - name: KEYCLOAK_IMAGE
+          value: jboss/keycloak-openshift:4.8.3.Final
+        - name: KEYCLOAK_PLUGIN_IMAGE
+          value: docker.io/enmasseproject/keycloak-plugin:0.28.0-rc6
+        - name: CONTROLLER_ENABLE_CONSOLE_SERVICE
+          value: "true"
+        - name: CONSOLE_INIT_IMAGE
+          value: "docker.io/enmasseproject/console-init:0.28.0-rc6"
+        - name: CONSOLE_PROXY_OPENSHIFT_IMAGE
+          value: "openshift/oauth-proxy:latest"
+        - name: CONSOLE_PROXY_KUBERNETES_IMAGE
+          value: "quay.io/pusher/oauth2_proxy:latest"
+        - name: CONSOLE_HTTPD_IMAGE
+          value: "docker.io/enmasseproject/console-httpd:0.28.0-rc6"
+        resources:
+          limits:
+            memory: 128Mi
