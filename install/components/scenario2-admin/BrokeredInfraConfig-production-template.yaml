@@ -27,7 +27,7 @@ objects:
               requiredDuringSchedulingIgnoredDuringExecution:
                 nodeSelectorTerms:
                   - matchExpressions:
-                    - key: enmasse.io
+                    - key: enmasse.io/infra
                       operator: In
                       values:
-                        - infra=true
+                        - true
