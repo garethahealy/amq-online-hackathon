@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: Template
+metadata:
+  name: standardInfraConfig-batch-template
+objects:
+- apiVersion: admin.enmasse.io/v1beta1
+  kind: BrokeredInfraConfig
+  metadata:
+    name: engineering
+    labels:
+      app: enmasse
+  spec:
+    admin:
+      resources:
+        memory: 512Mi
+    broker:
+      resources:
+        memory: 512Mi
+        storage: 50Mi
+      addressFullPolicy: FAIL
+      podTemplate:
+        spec:
+          priorityClassName: engineering
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                    - key: enmasse.io/infra
+                      operator: In
+                      values:
+                        - true

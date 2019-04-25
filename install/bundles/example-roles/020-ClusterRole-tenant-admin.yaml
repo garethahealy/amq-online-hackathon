@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: enmasse.io:tenant-admin
+  labels:
+    app: enmasse
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+rules:
+  - apiGroups: [ "admin.enmasse.io" ]
+    resources: [ "addressspaceplans", "addressplans", "authenticationservices" ]
+    verbs: [ "get", "list", "watch"]

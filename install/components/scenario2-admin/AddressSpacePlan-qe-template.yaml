@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Template
+metadata:
+  name: addressSpacePlan-default-template
+objects:
+- apiVersion: admin.enmasse.io/v1beta2
+  kind: AddressSpacePlan
+  metadata:
+    name: qe
+    labels:
+      app: enmasse
+  spec:
+    displayName: QE default
+    displayOrder: 1
+    infraConfigRef: qe
+    addressSpaceType: brokered
+    resourceLimits:
+      broker: 1.0 # Currently, brokered only offers 1 instance, so this number is fake
+    addressPlans:
+    - queue
+    - topic

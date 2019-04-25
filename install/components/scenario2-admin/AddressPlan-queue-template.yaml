@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: Template
+metadata:
+  name: addressPlan-batch-template
+objects:
+- apiVersion: admin.enmasse.io/v1beta2
+  kind: AddressPlan
+  metadata:
+    name: queue
+    labels:
+      app: enmasse
+  spec:
+    displayName: queue
+    addressType: queue
+    resources:
+      broker: 1.0 # Currently, brokered only offers 1 instance, so this number is fake

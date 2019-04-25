@@ -9,8 +9,9 @@
 #oc apply -f install/bundles/enmasse
 #oc apply -f install/bundles/monitoring
 
-
-#oc apply -f install/components/scenario1
+#oc apply -f install/bundles/example-roles
+#oc adm policy add-role-to-user view user1 -n enmasse-infra
+#oc adm policy add-role-to-user enmasse.io:tenant-admin user1 -n enmasse-infra
 
 USERNAME_PASS=$(echo -n password | base64)
 
