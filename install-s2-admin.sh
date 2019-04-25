@@ -2,8 +2,6 @@
 
 ## RUN AS ADMIN
 oc logout
-oc login -u opentlc-mgr -p r3dh4t1! https://master.amqhackfest-emea04.openshift.opentlc.com
-
 oc project enmasse-infra
 
 oc process -f install/components/scenario2-admin/PriorityClass-template.yaml | oc apply -n enmasse-infra  -f -
